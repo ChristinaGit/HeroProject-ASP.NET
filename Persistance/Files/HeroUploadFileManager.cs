@@ -36,7 +36,11 @@ namespace HeroProject.Persistance.Files
 
         public void DeleteHeroAvatar(int id)
         {
-            File.Delete(GetHeroAvatarPath(id));
+            var path = GetHeroAvatarPath(id);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
         }
 
         [NotNull]

@@ -262,4 +262,5 @@ __pycache__/
 /Presentation/bower_components
 /*/wwwroot/lib/bootstrap
 /*/wwwroot/lib/jquery
+/*/wwwroot/uploads
 /*/Migrations/**

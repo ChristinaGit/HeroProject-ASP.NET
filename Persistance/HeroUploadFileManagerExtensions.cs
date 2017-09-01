@@ -22,7 +22,7 @@ namespace HeroProject.Persistance
             byte[] avatar = null;
             if (@this.IsHeroAvatarExists(id))
             {
-                using (var avatarStream = new FileStream(@this.GetHeroAvatarPath(id), FileMode.Open))
+                using (var avatarStream = @this.OpenHeroAvatarStream(id, FileMode.Open))
                 {
                     avatar = avatarStream.ReadAll();
                 }

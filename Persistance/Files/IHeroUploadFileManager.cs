@@ -9,6 +9,9 @@ namespace HeroProject.Persistance.Files
         [NotNull]
         Task SaveHeroAvatarAsync(int id, [NotNull] byte[] avatar);
 
+        [NotNull]
+        FileStream OpenHeroAvatarStream(int id, FileMode fileMode);
+
         void DeleteHeroAvatar(int id);
 
         [NotNull]

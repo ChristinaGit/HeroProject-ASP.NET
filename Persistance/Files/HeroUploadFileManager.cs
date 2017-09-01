@@ -28,10 +28,18 @@ namespace HeroProject.Persistance.Files
         {
             Preconditions.RequireNotNull(avatar, nameof(avatar));
 
-            using (var outputStream = new FileStream(GetHeroAvatarPath(id), FileMode.Create))
+            using (var outputStream = OpenHeroAvatarStream(id, FileMode.Create))
             {
                 await outputStream.WriteAsync(avatar, 0, avatar.Length);
             }
+        }
+
+        [NotNull]
+        public FileStream OpenHeroAvatarStream(int id, FileMode fileMode)
+        {
+            PrepareHeroAvatarsDirectory();
+
+            return new FileStream(GetHeroAvatarPath(id), fileMode);
         }
 
         public void DeleteHeroAvatar(int id)

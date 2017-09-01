@@ -1,0 +1,51 @@
+﻿@using HeroProject.Common
+@using HeroProject.Presentation
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" asp-href-include="~/lib/bootstrap/dist/css/*.min.css" asp-append-version="true"/>
+    <script asp-src-include="~/lib/bootstrap/dist/js/*.min.js" asp-append-version="true"></script>
+
+    <script asp-src-include="~/lib/jquery/dist/**/*.min.js" asp-append-version="true"></script>
+
+    <title>Hero Project</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="@Url.ApplicationRoot()" class="navbar-brand">Heroes</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="@Url.ApplicationRoot()">Home</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            @Html.Partial(SharedViews.AccountNavigation)
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @ViewData.GetTitle()
+                </div>
+                <div class="panel-body">
+                    @Html.Partial(SharedViews.Alert)
+
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+﻿@using HeroProject.Presentation.Account
+@using HeroProject.Presentation.Account.ViewModels
+@model LoginViewModel
+
+<div class="text-danger" asp-validation-summary="All"></div>
+<form asp-action="@AccountController.Actions.Login.Name" 
+      asp-controller="@AccountController.Name" 
+      method="post">
+    <input type="hidden" asp-for="ReturnUrl" />
+    @Html.Partial(AccountViews.Form, Model)
+
+    <button class="btn btn-primary" type="submit">Log In</button>
+</form>

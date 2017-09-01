@@ -1,0 +1,54 @@
+﻿@using HeroProject.Presentation.Shared
+@using HeroProject.Presentation.Shared.ViewModels
+@model PageViewModel
+
+<ul class="pagination">
+    @{
+        var previousPageAvailable = Model.Index > PageControllerParams.StartPage;
+        var nextPageAvailable = Model.Index < Model.PageCount;
+
+        <li class="@(!previousPageAvailable ? "disabled" : string.Empty)">
+            @if (previousPageAvailable)
+            {
+                <a asp-all-route-data="@(new Dictionary<string, string>
+                                         {
+                                             [PageControllerParams.ParamPage] = (Model.Index - 1).ToString(),
+                                             [PageControllerParams.ParamPageSize] = Model.Size.ToString()
+                                         })">
+                    Previous
+                </a>
+            }
+            else
+            {
+                <a href="#">Previous</a>
+            }
+        </li>
+        <li class="@(!nextPageAvailable ? "disabled" : string.Empty)">
+            @if (nextPageAvailable)
+            {
+                <a asp-all-route-data="@(new Dictionary<string, string>
+                                         {
+                                             [PageControllerParams.ParamPage] = (Model.Index + 1).ToString(),
+                                             [PageControllerParams.ParamPageSize] = Model.Size.ToString()
+                                         })">
+                    Next
+                </a>
+            }
+            else
+            {
+                <a href="#">Next</a>
+            }
+        </li>
+        for (var i = PageControllerParams.StartPage; i <= Model.PageCount; i++)
+        {
+            <li class="@(Model.Index == i ? "active" : string.Empty)">
+                <a asp-all-route-data="@(new Dictionary<string, string>
+                                         {
+                                             [PageControllerParams.ParamPage] = i.ToString(),
+                                             [PageControllerParams.ParamPageSize] = Model.Size.ToString()
+                                         })">
+                    @i</a>
+            </li>
+        }
+    }
+</ul>

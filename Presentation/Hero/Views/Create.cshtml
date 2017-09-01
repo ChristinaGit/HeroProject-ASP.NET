@@ -1,0 +1,16 @@
+﻿@using HeroProject.Presentation.Hero
+@using HeroProject.Presentation.Hero.ViewModels
+@using HeroProject.Presentation.Hero.Views
+@model CreateViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-controller="@HeroController.Name"
+      asp-action="@HeroController.Actions.Create.Name"
+      asp-antiforgery="true"
+      enctype="multipart/form-data"
+      method="post">
+
+    @Html.Partial(HeroViews.Form, Model)
+
+    <button type="submit" class="btn btn-default">Create</button>
+</form>

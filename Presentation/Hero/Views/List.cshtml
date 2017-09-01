@@ -1,0 +1,86 @@
+﻿@using HeroProject.Common
+@using HeroProject.Presentation.Hero
+@using HeroProject.Presentation.Hero.ViewModels
+@using HeroProject.Presentation.Shared.Views
+@model ListViewModel
+
+<a asp-controller="@HeroController.Name"
+   asp-action="@HeroController.Actions.Create.Name"
+   class="btn btn-primary pull-right">
+    Create
+</a>
+
+@if (Model.Items.Any())
+{
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Avatar</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+
+            var i = 0;
+            foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@(Model.Page.Shift + i)</td>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        @if (item.AvatarFileName != null)
+                        {
+                            <a asp-controller="@HeroController.Name"
+                               asp-action="@HeroController.Actions.Avatar.Name"
+                               asp-all-route-data="@(new Dictionary<string, string> {[HeroController.Actions.ParamId] = item.Id.ToString()})">
+                                <img alt="&lt;no Image&gt;" height="40" width="40" src="@Url.AsContent(item.AvatarFileName)"/>
+                            </a>
+                        }
+                        else
+                        {
+                            @:&lt;no Image&gt;
+                        }
+                    </td>
+                    <td>
+                        <div class="pull-right">
+                            <a asp-controller="@HeroController.Name"
+                               asp-action="@HeroController.Actions.Details.Name"
+                               asp-all-route-data="@(new Dictionary<string, string> {[HeroController.Actions.ParamId] = item.Id.ToString()})"
+                               class="btn btn-info">
+                                Details
+                            </a>
+                            <a asp-controller="@HeroController.Name"
+                               asp-action="@HeroController.Actions.Edit.Name"
+                               asp-all-route-data="@(new Dictionary<string, string> {[HeroController.Actions.ParamId] = item.Id.ToString()})"
+                               class="btn btn-warning">
+                                Edit
+                            </a>
+                            <form method="post" style="display: inline;">
+                                <input type="submit" asp-controller="@HeroController.Name"
+                                       asp-action="@HeroController.Actions.Delete.Name"
+                                       asp-all-route-data="@(new Dictionary<string, string> {[HeroController.Actions.ParamId] = item.Id.ToString()})"
+                                       class="btn btn-danger"
+                                       value="Delete"/>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+
+                i++;
+            }
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div>
+        No records
+    </div>
+}
+@Html.Partial(SharedViews.Pagination, Model.Page)

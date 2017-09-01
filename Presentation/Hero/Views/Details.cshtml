@@ -1,0 +1,42 @@
+﻿@using HeroProject.Common
+@using HeroProject.Presentation.Hero
+@using HeroProject.Presentation.Hero.ViewModels
+@model DetailsViewModel
+
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        <td>ID</td>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td>Strength</td>
+        <td>@Model.Strength</td>
+    </tr>
+    <tr>
+        <td>Dexterity</td>
+        <td>@Model.Dexterity</td>
+    </tr>
+    <tr>
+        <td>Intelligence</td>
+        <td>@Model.Intelligence</td>
+    </tr>
+    @if (Model.AvatarFileName != null)
+    {
+        <tr>
+            <td>Avatar</td>
+            <td>
+                <a asp-controller="@HeroController.Name"
+                   asp-action="@HeroController.Actions.Avatar.Name"
+                   asp-all-route-data="@(new Dictionary<string, string> {[HeroController.Actions.ParamId] = Model.Id.ToString()})">
+                    <img alt="&lt;no Image&gt;" src="@Url.AsContent(Model.AvatarFileName)"/>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

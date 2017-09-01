@@ -1,0 +1,34 @@
+﻿@using HeroProject.Presentation.Account
+@if (Context.User.Identity.IsAuthenticated)
+{
+    <li>
+        <p class="navbar-text navbar-right">
+            @Context.User.Identity.Name
+        </p>
+    </li>
+    <li>
+        <form method="post" class="navbar-form navbar-right">
+            <button type="submit"
+                    class="btn btn-link"
+                    asp-controller="@AccountController.Name"
+                    asp-action="@AccountController.Actions.Logout.Name">
+                <span class="glyphicon glyphicon-log-out"></span> Logout
+            </button>
+        </form>
+    </li>
+}
+else
+{
+    <li>
+        <a asp-controller="@AccountController.Name"
+           asp-action="@AccountController.Actions.Signup.Name">
+            <span class="glyphicon glyphicon-user"></span> Sign Up
+        </a>
+    </li>
+    <li>
+        <a asp-controller="@AccountController.Name"
+           asp-action="@AccountController.Actions.Login.Name">
+            <span class="glyphicon glyphicon-log-in"></span> Login
+        </a>
+    </li>
+}

@@ -1,0 +1,14 @@
+﻿@using HeroProject.Presentation.Account
+@using HeroProject.Presentation.Account.ViewModels
+@model SignupViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-controller="@AccountController.Name"
+      asp-action="@AccountController.Actions.Signup.Name"
+      asp-antiforgery="true"
+      method="post">
+
+    @Html.Partial(AccountViews.Form, Model)
+
+    <button type="submit" class="btn btn-default">Sign Up</button>
+</form>
